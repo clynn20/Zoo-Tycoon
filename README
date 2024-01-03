@@ -1,0 +1,7 @@
+This is a C++ program to play Zoo Tycoon
+
+Use command make to compile the program
+
+Use the below command to run the game
+./zootycoon
+
