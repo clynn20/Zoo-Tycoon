@@ -6,6 +6,7 @@
 #include"bear.h"
 #include"sealion.h"
 using namespace std;
+
 //default constructor
 Zoo::Zoo(){
 	sealions = NULL;
@@ -39,6 +40,11 @@ Zoo::Zoo(const Zoo& old){
 }
 //assignment operator overload
 Zoo& Zoo::operator=(const Zoo& old){
+	if (this != &old){
+		delete [] sealions;
+		delete [] tigers;
+		delete [] bears;
+	}
 	sealions = old.sealions;
 	tigers = old.tigers;
 	bears = old.bears;
@@ -55,7 +61,7 @@ Zoo& Zoo::operator=(const Zoo& old){
 }
 //destructor
 Zoo::~Zoo(){
-	cout <<"Zoo destructor"<< endl;
+	//cout <<"Zoo destructor"<< endl;
 	if(num_tigers > 0){
 		delete [] tigers;
 	}
@@ -74,7 +80,7 @@ Tiger* Zoo::get_tigers(){
 Bear* Zoo::get_bears(){
 	return bears;
 }
-//get sealion
+//get sealions
 Sealion* Zoo::get_sealions(){
 	return sealions;
 }
@@ -102,7 +108,7 @@ int Zoo::get_num_animals(){
 int Zoo::get_num_tigers(){
 	return num_tigers;
 }
-//get number of sealion
+//get number of sealions
 int Zoo::get_num_sealions(){
 	return num_sealions;
 }
@@ -150,7 +156,7 @@ int Zoo::get_baby_bears(){
 	}
 	return baby_bears;
 }
-//get number of adult sealion
+//get number of adult sealions
 int Zoo::get_adult_sealions(){
 	int adult_sealions = 0;
 	for(int i=0;i<num_sealions;i++){
@@ -160,7 +166,7 @@ int Zoo::get_adult_sealions(){
 	}
 	return adult_sealions;
 }
-//get number of baby sealion
+//get number of baby sealions
 int Zoo::get_baby_sealions(){
 	int baby_sealions = 0;
 	for(int i=0;i<num_sealions;i++){
@@ -180,7 +186,7 @@ Bear Zoo::random_bear(){
 	int index = rand() % num_bears;
 	return bears[index];
 }
-//get random sealion
+//get random sealions
 Sealion Zoo::random_sealion(){
 	int index = rand() % num_sealions;
 	return sealions[index];
@@ -330,7 +336,7 @@ void Zoo::remove_sealion(int index){
 			if(new_age<6){
 				new_sealions[i].set_revenue(280);
 			}
-			else if(new_age > 6|| new_age ==6){
+			else if(new_age > 6|| new_age == 6){
 				new_sealions[i].set_revenue(140);
 			}
 		}
@@ -345,7 +351,7 @@ void Zoo::special_event(){
 		cout << "No animals right now, so no special event this turn" << endl;
 	}
 	else if(num_animals!=0){
-		int num = rand()%4;
+		int num = rand() % 4;
 		switch(num){
 			case 0:
 				cout <<"You are given a sick event" << endl;
@@ -402,9 +408,9 @@ void Zoo::sick_event(){
 		}
 		case 1:{//bear
 			if(have_bear()){
-				int index = rand()%num_bears;
+				int index = rand() % num_bears;
 				int sick_cost = bears[index].get_sick_cost();
-				if(bank_money>sick_cost){
+				if(bank_money > sick_cost){
 			      	bank_money -= sick_cost;
 					paid += sick_cost;
 			      	cout <<"Bear get sick, you paid " << sick_cost << endl;
@@ -423,7 +429,7 @@ void Zoo::sick_event(){
 			if(have_sealion()){
 				int index = rand() % num_sealions;
 				int sick_cost = sealions[index].get_sick_cost();
-				if(bank_money>sick_cost){
+				if(bank_money > sick_cost){
 					bank_money -= sick_cost;
 					cout <<" Sealion get sick, you paid " << sick_cost <<endl;
 				}
@@ -539,7 +545,7 @@ void Zoo::update_revenue(){
 void Zoo::buy_animal(){
 	string str = "3";
 	while(str!="0" && str!="1"){
-		cout <<"Do you want to buy animal?(Yes : 0 , No : 1): ";
+		cout <<"Do you want to buy animal? (Yes : 0 , No : 1): ";
 		getline(cin,str);
 	}
 	if(str=="1"){
@@ -548,36 +554,36 @@ void Zoo::buy_animal(){
 //	cout << endl;
 	string option = "5";
 	while(option!="0" && option!="1" && option!="2"){
-		cout <<"Which species do you want to buy?(tiger press 0, bear press 1, sealion press 2): " ;
+		cout <<"Which species do you want to buy? (tiger press 0, bear press 1, sealion press 2): " ;
 		getline(cin,option);
 		if(!can_buyA(option)){
-			cout <<"No enough money try again" << endl;
+			cout <<"No enough money try again." << endl;
 			option = "5";
 		}
 	}
 	int species = atoi(option.c_str());
 	string num = "3";
 	while(num!="1"&&num!="2"){
-		cout <<"How many amount do you want to buy?(choose 1 or 2): ";
+		cout <<"How many amount do you want to buy? (choose 1 or 2): ";
 		getline(cin,num);
 		if(!can_buyB(num,option)){
-			cout <<"No enough money try again" << endl;
+			cout <<"No enough money try again." << endl;
 			num = "3";
 		}
 	}
 	int amount = atoi(num.c_str());
 	for(int i=0;i<amount;i++){
-		if(species==0){//tiger
+		if(species == 0){//tiger
 			add_tiger(48);
 			bank_money -= 12000;
 			paid += 12000;
 		}
-		else if(species==1){//bear
+		else if(species == 1){//bear
 			add_bear(48);
 			bank_money -= 5000;
 			paid += 5000;
 		}
-		else if(species==2){//sealion
+		else if(species == 2){//sealion
 			add_sealion(48);
 			bank_money -= 700;
 			paid += 700;
@@ -588,46 +594,28 @@ void Zoo::buy_animal(){
 //can buy ver1
 bool Zoo::can_buyA(string option){
 	int species = atoi(option.c_str());
-	if(species==0){//tiger
-		if(bank_money>12000){
-			return true;
-		}
-		return false;
+	if(species == 0){//tiger
+		return (bank_money > 12000)? true : false;
 	}
-	else if(species==1){//bear
-		if(bank_money>5000){
-			return true;
-		}
-		return false;
+	else if(species == 1){//bear
+		return (bank_money > 5000)? true : false;
 	}
-	else if(species==2){//sealion
-		if(bank_money>700){
-			return true;
-		}
-		return false;
+	else if(species == 2){//sealion
+		return (bank_money > 700)? true : false;
 	}
 }
 //can buy ver2
 bool Zoo::can_buyB(string num,string option){
 	int amount = atoi(num.c_str());
 	int species = atoi(option.c_str());
-		if(species==0){//tiger
-			if(bank_money>amount*12000){
-				return true;
-			}
-			return false;
+		if(species == 0){//tiger
+			return (bank_money > amount*12000)? true : false;
 		}
-		else if(species==1){//bear
-			if(bank_money>amount*5000){
-				return true;
-			}
-			return false;
+		else if(species == 1){//bear
+			return (bank_money > amount*5000)? true : false;
 		}
-		else if(species==2){//sealion
-			if(bank_money>amount*700){
-				return true;
-			}
-			return false;
+		else if(species == 2){//sealion
+			return (bank_money > amount*700)? true : false;
 		}
 }
 //start turn
@@ -647,20 +635,24 @@ void Zoo::start_turn(){
 
 //print status
 void Zoo::start_print(){
+	cout << "--------------------------------" << endl;
 	cout << "Start of month: " << month  << endl;
 	cout << "Money in the bank: " << get_bank_money() << endl;
 	cout << "Number of animals in zoo: " << get_num_animals() << endl;
 	cout << "Number of tiger in zoo: " << get_num_tigers() << endl;
 	cout << "Number of bear in zoo: " << get_num_bears() << endl;
 	cout << "Number of sealion in zoo: " << get_num_sealions() << endl;
+	cout << "----------------------------------" << endl;
 	month++;
 }
 //print status
 void Zoo::end_print(){
+	cout << "--------------------------------" << endl;
 	cout <<"End of month" <<endl;
 	cout <<"Revenue get this month: "<< get_revenue()<< endl;
 	cout <<"Money paid out: " << get_paid()<< endl;
 	cout <<"Money in the bank remain: " << get_bank_money() <<endl;
+	cout << "---------------------------------" << endl;
 	Tiger *tigers = get_tigers();
 	Bear *bears = get_bears();
 	Sealion *sealions = get_sealions();

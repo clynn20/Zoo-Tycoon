@@ -18,13 +18,13 @@ int main(){
 		z1.buy_animal();
 		z1.paid_food_cost();
 		z1.end_print();
-		cout <<"Do you want to quit(Yes press 0, No press 1): ";
+		cout <<"Do you want to quit? (Yes press 0, No press 1): ";
 		getline(cin,quit);
 		if(quit=="0"){
 			exit(0);
 		}
 		if(z1.get_bank_money()==0){
-			cout << "Bankrupt, game over" << endl;
+			cout << "Bankrupt, game over!" << endl;
 			exit(0);
 		}
 	}

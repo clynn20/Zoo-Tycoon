@@ -2,9 +2,9 @@
 #include"bear.h"
 using namespace std;
 
-int Bear::cost=5000;
-int Bear::baby=2;
-int Bear::mon_food_cost=3;
+int Bear::cost = 5000;
+int Bear::baby = 2;
+int Bear::mon_food_cost = 3;
 //default constructor
 Bear::Bear():Animal(){
 	revenue = 500;
@@ -25,8 +25,8 @@ Bear::Bear(const Bear& old):Animal(old){
 }
 //assignment operator overload
 Bear& Bear::operator=(const Bear& old){
-	age=old.age;
-	revenue=old.revenue;
+	age = old.age;
+	revenue = old.revenue;
 	return *this;
 }
 //destructor

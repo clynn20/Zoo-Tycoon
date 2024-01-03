@@ -1,4 +1,6 @@
-This is a C++ program to play Zoo Tycoon
+This is a C++ program to play Zoo Tycoon. 
+
+You are the owner of the city's zoo, which has exhibits of bears, tigers and sealions. As the owner, it's your job to ensure the welfare of the animal and generate as much profit as possible. You can accomplish these goals by investing in animals, feeding them, caring for them when they are sick, and raising their babies when they are born.The game starts with the owner having no animals and $100000 in the bank, and it proceeds one month at a time. Each month 
 
 Use command make to compile the program
 

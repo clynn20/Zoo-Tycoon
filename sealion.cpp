@@ -2,9 +2,9 @@
 #include"sealion.h"
 using namespace std;
 
-int Sealion::cost=700;
-int Sealion::baby=1;
-int Sealion::mon_food_cost=1;
+int Sealion::cost = 700;
+int Sealion::baby = 1;
+int Sealion::mon_food_cost = 1;
 
 //default constructor
 Sealion::Sealion():Animal(){

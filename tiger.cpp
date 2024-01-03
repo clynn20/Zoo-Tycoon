@@ -2,9 +2,9 @@
 #include"tiger.h"
 using namespace std;
 
-int Tiger::cost=12000;
-int Tiger::baby=3;
-int Tiger::mon_food_cost=5;
+int Tiger::cost = 12000;
+int Tiger::baby = 3;
+int Tiger::mon_food_cost = 5;
 
 //default constructor
 Tiger::Tiger():Animal(){
@@ -21,8 +21,8 @@ Tiger::Tiger(int new_age):Animal(new_age){
 }
 //copy constructor
 Tiger::Tiger(const Tiger &old):Animal(old){
-	age=old.age;
-	revenue=old.revenue;
+	age = old.age;
+	revenue = old.revenue;
 }
 //assignment operator overload
 Tiger& Tiger::operator=(const Tiger& old){

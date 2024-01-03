@@ -8,12 +8,12 @@ Animal::Animal(){
 }
 //constructor w/ parameter
 Animal::Animal(int new_age){
-	age=new_age;
+	age = new_age;
 }
 //copy constructor
 Animal::Animal(const Animal& old){
-	age=old.age;
-	revenue=old.revenue;
+	age = old.age;
+	revenue = old.revenue;
 }
 //assignment operator overload
 Animal& Animal::operator=(const Animal& old){
